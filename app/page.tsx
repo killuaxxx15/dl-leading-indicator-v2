@@ -119,7 +119,7 @@ export default function Home() {
             {/* Data status pill */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px', flexShrink: 0 }}>
               <StatusPill status={dataStatus} liveCount={liveCount} total={totalCount} loading={loading} />
-              <DataSourcesButton />
+              <DataSourcesButton liveValues={liveValues} />
             </div>
           </div>
 
