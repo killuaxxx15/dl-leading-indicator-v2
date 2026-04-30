@@ -1,0 +1,10 @@
+{
+  "env": {
+    "FRED_API_KEY": "@fred_api_key"
+  },
+  "functions": {
+    "app/api/indicators/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}
