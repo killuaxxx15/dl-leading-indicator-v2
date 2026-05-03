@@ -223,11 +223,16 @@ function IndicatorRow({ indicatorKey, liveValues }: { indicatorKey: string; live
         el.style.background = C.bg2;
       }}
     >
-      {/* Indicator name */}
+      {/* Indicator name + ticker */}
       <div>
         <div style={{ fontSize: '12px', fontWeight: '600', color: C.ink }}>{cfg.name}</div>
-        <div style={{ fontSize: '9px', color: C.muted, fontFamily: 'monospace', marginTop: '1px' }}>
+        <div style={{ fontSize: '9px', color: C.muted, fontFamily: 'monospace', marginTop: '2px', lineHeight: '1.4' }}>
           {indicatorKey}
+          {cfg.note && cfg.note.includes('Ticker:') && (
+            <div style={{ marginTop: '2px', color: C.gold, fontWeight: '500' }}>
+              {cfg.note.split('Ticker:')[1]}
+            </div>
+          )}
         </div>
       </div>
 
