@@ -64,8 +64,7 @@ function calcYoY(arr: number[], periodsBack: number): [number, number] {
 // ── S&P 500 vs 200DMA from Yahoo ──────────────────────────────────────
 async function fetchSPX200DMA(): Promise<LiveValue> {
   const { closes } = await yahooChart('%5EGSPC', '2y', '1d'); // ^GSPC = S&P 500
-  const clean = closes.filter(v => v != null && !isNaN(v)).reverse(); // ascending
-  const desc = [...clean].reverse(); // back to descending
+  const desc = closes.filter(v => v != null && !isNaN(v)).reverse(); // Yahoo is ascending, reverse to descending
   if (desc.length < 201) throw new Error('SPX: insufficient data');
   const ma200 = desc.slice(0, 200).reduce((s, v) => s + v, 0) / 200;
   const ma200prior = desc.slice(1, 201).reduce((s, v) => s + v, 0) / 200;
@@ -105,8 +104,7 @@ async function fetchBCOMYoY(): Promise<LiveValue> {
     const result = await yahooChart('DJP', '2y', '1d');
     closes = result.closes;
   }
-  const clean = closes.filter(v => v != null && !isNaN(v)).reverse();
-  const desc = [...clean].reverse();
+  const desc = closes.filter(v => v != null && !isNaN(v)).reverse(); // Yahoo is ascending, reverse to descending
   if (desc.length < 253) throw new Error('BCOM: insufficient data for YoY');
   const [current, prior] = calcYoY(desc, 252);
   return {
