@@ -7,6 +7,14 @@ import type { ApiResponse, LiveValue } from './types';
 
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
+// Browser headers to avoid 401 from Yahoo
+const BROWSER_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Accept': 'application/json, text/plain, */*',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Referer': 'https://finance.yahoo.com/',
+};
+
 // ── FRED fetcher ──────────────────────────────────────────────────────
 async function fredGet(series: string, apiKey: string, limit = 20): Promise<number[]> {
   const url = `${FRED_BASE}?series_id=${series}&api_key=${apiKey}&file_type=json&sort_order=desc&limit=${limit}`;
@@ -23,6 +31,26 @@ async function fredGetLong(series: string, apiKey: string, limit = 500): Promise
   return fredGet(series, apiKey, limit);
 }
 
+// ── Yahoo Finance chart fetcher ───────────────────────────────────────
+async function yahooChart(
+  symbol: string,
+  range = '2y',
+  interval = '1d'
+): Promise<{ timestamps: number[]; closes: number[] }> {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${interval}&range=${range}`;
+  const res = await fetch(url, {
+    headers: BROWSER_HEADERS,
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) throw new Error(`Yahoo ${symbol}: HTTP ${res.status}`);
+  const json = await res.json();
+  const result = json?.chart?.result?.[0];
+  if (!result) throw new Error(`Yahoo ${symbol}: no data`);
+  const timestamps: number[] = result.timestamp || [];
+  const closes: number[] = result.indicators?.quote?.[0]?.close || [];
+  return { timestamps, closes };
+}
+
 // ── YoY helper (descending array: arr[0] = most recent) ──────────────
 function calcYoY(arr: number[], periodsBack: number): [number, number] {
   if (arr.length < periodsBack + 2) throw new Error('Not enough data for YoY');
@@ -33,28 +61,57 @@ function calcYoY(arr: number[], periodsBack: number): [number, number] {
   return [currentYoY, priorYoY];
 }
 
-// ── SPX 200-day MA from FRED SP500 daily series ───────────────────────
-async function fetchSPX200DMA(apiKey: string): Promise<LiveValue> {
-  const arr = await fredGet('SP500', apiKey, 210);
-  if (arr.length < 201) throw new Error('SPX: insufficient data for 200DMA');
-  const ma200 = arr.slice(0, 200).reduce((s, v) => s + v, 0) / 200;
-  const ma200prior = arr.slice(1, 201).reduce((s, v) => s + v, 0) / 200;
+// ── S&P 500 vs 200DMA from Yahoo ──────────────────────────────────────
+async function fetchSPX200DMA(): Promise<LiveValue> {
+  const { closes } = await yahooChart('%5EGSPC', '2y', '1d'); // ^GSPC = S&P 500
+  const clean = closes.filter(v => v != null && !isNaN(v)).reverse(); // ascending
+  const desc = [...clean].reverse(); // back to descending
+  if (desc.length < 201) throw new Error('SPX: insufficient data');
+  const ma200 = desc.slice(0, 200).reduce((s, v) => s + v, 0) / 200;
+  const ma200prior = desc.slice(1, 201).reduce((s, v) => s + v, 0) / 200;
   return {
-    current: parseFloat((((arr[0] / ma200) - 1) * 100).toFixed(2)),
-    prior:   parseFloat((((arr[1] / ma200prior) - 1) * 100).toFixed(2)),
+    current: parseFloat((((desc[0] / ma200) - 1) * 100).toFixed(2)),
+    prior:   parseFloat((((desc[1] / ma200prior) - 1) * 100).toFixed(2)),
   };
 }
 
-// ── Copper / Gold ratio from FRED monthly series ──────────────────────
-async function fetchCopperGold(apiKey: string): Promise<LiveValue> {
-  const [copper, gold] = await Promise.all([
-    fredGet('PCOPPUSDM', apiKey, 5),         // Global price of Copper, USD/metric ton
-    fredGet('GOLDPMGBD228NLBM', apiKey, 5),  // Gold PM fix, USD/troy oz
+// ── Copper / Gold ratio from Yahoo ────────────────────────────────────
+async function fetchCopperGold(): Promise<LiveValue> {
+  const [cu, au] = await Promise.all([
+    yahooChart('HG%3DF', '2y', '1d'),  // HG=F copper futures
+    yahooChart('GC%3DF', '2y', '1d'),  // GC=F gold futures
   ]);
-  if (!copper.length || !gold.length) throw new Error('Copper/Gold: missing data');
+  const cuClean = cu.closes.filter(v => v != null && !isNaN(v));
+  const auClean = au.closes.filter(v => v != null && !isNaN(v));
+  if (!cuClean.length || !auClean.length) throw new Error('Copper/Gold: missing data');
+  const cuCurrent = cuClean[cuClean.length - 1];
+  const auCurrent = auClean[auClean.length - 1];
+  const cuPrior = cuClean.length > 1 ? cuClean[cuClean.length - 2] : cuCurrent;
+  const auPrior = auClean.length > 1 ? auClean[auClean.length - 2] : auCurrent;
   return {
-    current: parseFloat((copper[0] / gold[0]).toFixed(6)),
-    prior:   parseFloat(((copper[1] ?? copper[0]) / (gold[1] ?? gold[0])).toFixed(6)),
+    current: parseFloat((cuCurrent / auCurrent).toFixed(6)),
+    prior:   parseFloat((cuPrior / auPrior).toFixed(6)),
+  };
+}
+
+// ── Bloomberg Commodity Index YoY from Yahoo ──────────────────────────
+async function fetchBCOMYoY(): Promise<LiveValue> {
+  // Try ^BCOM first, fall back to DJP (iPath Bloomberg Commodity ETN)
+  let closes: number[] = [];
+  try {
+    const result = await yahooChart('%5EBCOM', '2y', '1d');
+    closes = result.closes;
+  } catch {
+    const result = await yahooChart('DJP', '2y', '1d');
+    closes = result.closes;
+  }
+  const clean = closes.filter(v => v != null && !isNaN(v)).reverse();
+  const desc = [...clean].reverse();
+  if (desc.length < 253) throw new Error('BCOM: insufficient data for YoY');
+  const [current, prior] = calcYoY(desc, 252);
+  return {
+    current: parseFloat(current.toFixed(2)),
+    prior:   parseFloat(prior.toFixed(2)),
   };
 }
 
@@ -165,15 +222,10 @@ export async function fetchAll(apiKey: string): Promise<ApiResponse> {
       return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
     }),
 
-    // BCOM proxy: PPI Crude Materials YoY (monthly, FRED series PPICRM)
-    safe('BCOM_YOY', () => fredGetLong('PPICRM', apiKey), arr => {
-      const [c, p] = calcYoY(arr, 12);
-      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
-    }),
-
-    // ── Market data via FRED ──────────────────────────────────────────
-    safe('SPX_VS_200DMA', () => fetchSPX200DMA(apiKey), v => v),
-    safe('COPPER_GOLD',   () => fetchCopperGold(apiKey), v => v),
+    // ── Yahoo Finance: real-time market data ───────────────────────────
+    safe('SPX_VS_200DMA', () => fetchSPX200DMA(), v => v),
+    safe('COPPER_GOLD',   () => fetchCopperGold(), v => v),
+    safe('BCOM_YOY',      () => fetchBCOMYoY(), v => v),
 
     // ── Rent YoY: Zillow ZORI → fallback to FRED rent CPI ────────────
     safe('ZORI_YOY', async () => {
