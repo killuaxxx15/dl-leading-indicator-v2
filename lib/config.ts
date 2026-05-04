@@ -108,12 +108,12 @@ const RAW: Record<string, RawConfig> = {
   // ── GROWTH: Survey & sentiment (20%) ──
   ISM_NEW_ORDERS: {
     pillar: 'growth', group: 'growth_surveys',
-    name: 'ISM Mfg New Orders', source: 'FRED',
-    lead_months: 2, direction: 'positive_50',
-    baseline_mean: 51, baseline_std: 4.5, unit: 'index (50 neutral)',
-    note: 'New orders lead production 1-2 months. 50 = neutral.',
-    source_url: 'https://fred.stlouisfed.org/series/NAPMNO',
-    source_label: 'FRED · NAPMNO',
+    name: 'Industrial Production Index', source: 'FRED',
+    lead_months: 2, direction: 'positive',
+    baseline_mean: 100, baseline_std: 8, unit: '2017=100',
+    note: 'Federal Reserve Industrial Production Index. Real-time measure of manufacturing & utilities output.',
+    source_url: 'https://fred.stlouisfed.org/series/INDPRO',
+    source_label: 'FRED · INDPRO',
   },
   LEI: {
     pillar: 'growth', group: 'growth_surveys',

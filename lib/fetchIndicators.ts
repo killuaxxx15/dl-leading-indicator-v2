@@ -189,11 +189,10 @@ export async function fetchAll(apiKey: string): Promise<ApiResponse> {
       prior:   parseFloat((arr[1] * 100).toFixed(0)),
     })),
 
-    // ISM New Orders — try NAPMNO, fall back to composite NAPM
-    safe('ISM_NEW_ORDERS', async () => {
-      try { return await fredGet('NAPMNO', apiKey, 5); }
-      catch { return await fredGet('NAPM', apiKey, 5); }
-    }, arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
+    // Industrial Production Index (INDPRO)
+    safe('ISM_NEW_ORDERS', () => fredGet('INDPRO', apiKey, 5), arr => ({
+      current: arr[0], prior: arr[1] ?? arr[0],
+    })),
 
     safe('ICSA',   () => fredGet('ICSA',   apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
     safe('PERMIT', () => fredGet('PERMIT', apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
