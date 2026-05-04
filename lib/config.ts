@@ -157,12 +157,12 @@ const RAW: Record<string, RawConfig> = {
   },
   ATLANTA_WAGE: {
     pillar: 'inflation', group: 'inflation_core_drivers',
-    name: 'Atlanta Fed Wage Growth', source: 'Atlanta Fed',
+    name: 'Private Sector Wage Growth', source: 'FRED',
     lead_months: 7, direction: 'negative',
     baseline_mean: 3.5, baseline_std: 1.0, unit: '% YoY',
-    note: 'Leads services inflation 6-9 months. Services = 60% of core CPI.',
-    source_url: 'https://www.atlantafed.org/chcs/wage-growth-tracker',
-    source_label: 'Atlanta Fed · Wage Growth Tracker',
+    note: 'Average Hourly Earnings, all private employees. Leads services inflation 6-9 months.',
+    source_url: 'https://fred.stlouisfed.org/series/AHETPI',
+    source_label: 'FRED · AHETPI',
   },
 
   // ── INFLATION: Market-implied expectations (25%) ──
