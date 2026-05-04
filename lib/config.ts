@@ -101,7 +101,7 @@ const RAW: Record<string, RawConfig> = {
     lead_months: 3, direction: 'positive',
     baseline_mean: 0.00220, baseline_std: 0.00030, unit: 'ratio',
     note: 'Pro-cyclical copper vs safe-haven gold. Tickers: HG=F (copper futures) · GC=F (gold futures)',
-    source_url: 'https://finance.yahoo.com/quote/HG%3DF/',
+    source_url: 'https://finance.yahoo.com/quote/HG=F/',
     source_label: 'Yahoo Finance · HG=F / GC=F',
   },
 
