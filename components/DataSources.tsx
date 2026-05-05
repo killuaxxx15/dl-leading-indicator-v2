@@ -145,13 +145,13 @@ export function DataSourcesButton({ liveValues }: { liveValues: Record<string, L
               {/* Column headers */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: '2fr 1.4fr 1fr 1fr',
+                gridTemplateColumns: '2fr 1.4fr 1fr 1fr 1fr',
                 gap: '8px',
                 padding: '0 10px 8px',
                 borderBottom: `1px solid ${C.border}`,
                 marginBottom: '8px',
               }}>
-                {['Indicator', 'Source', 'Current Value', 'Lead'].map(h => (
+                {['Indicator', 'Source', 'Current Value', 'Data Date', 'Lead'].map(h => (
                   <div key={h} style={{ fontSize: '9px', fontFamily: 'monospace', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{h}</div>
                 ))}
               </div>
@@ -200,7 +200,7 @@ function IndicatorRow({ indicatorKey, liveValues }: { indicatorKey: string; live
       rel="noopener noreferrer"
       style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1.4fr 1fr 1fr',
+        gridTemplateColumns: '2fr 1.4fr 1fr 1fr 1fr',
         gap: '8px',
         alignItems: 'center',
         padding: '9px 10px',
@@ -244,6 +244,11 @@ function IndicatorRow({ indicatorKey, liveValues }: { indicatorKey: string; live
 
       {/* Live value */}
       <ValueBadge v={v} unit={cfg.unit} />
+
+      {/* Data date */}
+      <div style={{ fontSize: '10px', color: C.muted, fontFamily: 'monospace' }}>
+        {v.lastUpdated || '—'}
+      </div>
 
       {/* Lead time */}
       <div style={{ fontSize: '10px', color: C.muted, fontFamily: 'monospace' }}>

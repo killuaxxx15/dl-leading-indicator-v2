@@ -16,18 +16,20 @@ const BROWSER_HEADERS = {
 };
 
 // ── FRED fetcher ──────────────────────────────────────────────────────
-async function fredGet(series: string, apiKey: string, limit = 20): Promise<number[]> {
+async function fredGet(series: string, apiKey: string, limit = 20): Promise<{ values: number[]; latestDate: string }> {
   const url = `${FRED_BASE}?series_id=${series}&api_key=${apiKey}&file_type=json&sort_order=desc&limit=${limit}`;
   const res = await fetch(url, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`FRED ${series}: HTTP ${res.status}`);
   const data = await res.json();
   if (data.error_message) throw new Error(`FRED ${series}: ${data.error_message}`);
-  return (data.observations as { value: string }[])
-    .filter(o => o.value !== '.')
-    .map(o => parseFloat(o.value));
+  const validObs = (data.observations as { value: string; date: string }[]).filter(o => o.value !== '.');
+  return {
+    values: validObs.map(o => parseFloat(o.value)),
+    latestDate: validObs[0]?.date ?? '',
+  };
 }
 
-async function fredGetLong(series: string, apiKey: string, limit = 500): Promise<number[]> {
+async function fredGetLong(series: string, apiKey: string, limit = 500): Promise<{ values: number[]; latestDate: string }> {
   return fredGet(series, apiKey, limit);
 }
 
@@ -36,7 +38,7 @@ async function yahooChart(
   symbol: string,
   range = '2y',
   interval = '1d'
-): Promise<{ timestamps: number[]; closes: number[] }> {
+): Promise<{ timestamps: number[]; closes: number[]; latestDate: string }> {
   const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${interval}&range=${range}`;
   const res = await fetch(url, {
     headers: BROWSER_HEADERS,
@@ -48,7 +50,9 @@ async function yahooChart(
   if (!result) throw new Error(`Yahoo ${symbol}: no data`);
   const timestamps: number[] = result.timestamp || [];
   const closes: number[] = result.indicators?.quote?.[0]?.close || [];
-  return { timestamps, closes };
+  const lastTs = timestamps[timestamps.length - 1];
+  const latestDate = lastTs ? new Date(lastTs * 1000).toISOString().split('T')[0] : '';
+  return { timestamps, closes, latestDate };
 }
 
 // ── YoY helper (descending array: arr[0] = most recent) ──────────────
@@ -63,7 +67,7 @@ function calcYoY(arr: number[], periodsBack: number): [number, number] {
 
 // ── S&P 500 vs 200DMA from Yahoo ──────────────────────────────────────
 async function fetchSPX200DMA(): Promise<LiveValue> {
-  const { closes } = await yahooChart('^GSPC', '2y', '1d'); // S&P 500
+  const { closes, latestDate } = await yahooChart('^GSPC', '2y', '1d'); // S&P 500
   const desc = closes.filter(v => v != null && !isNaN(v)).reverse(); // Yahoo is ascending, reverse to descending
   if (desc.length < 201) throw new Error('SPX: insufficient data');
   const ma200 = desc.slice(0, 200).reduce((s, v) => s + v, 0) / 200;
@@ -71,6 +75,7 @@ async function fetchSPX200DMA(): Promise<LiveValue> {
   return {
     current: parseFloat((((desc[0] / ma200) - 1) * 100).toFixed(2)),
     prior:   parseFloat((((desc[1] / ma200prior) - 1) * 100).toFixed(2)),
+    lastUpdated: latestDate,
   };
 }
 
@@ -90,6 +95,7 @@ async function fetchCopperGold(): Promise<LiveValue> {
   return {
     current: parseFloat((cuCurrent / auCurrent).toFixed(6)),
     prior:   parseFloat((cuPrior / auPrior).toFixed(6)),
+    lastUpdated: cu.latestDate || au.latestDate,
   };
 }
 
@@ -97,12 +103,15 @@ async function fetchCopperGold(): Promise<LiveValue> {
 async function fetchBCOMYoY(): Promise<LiveValue> {
   // Try ^BCOM first, fall back to DJP (iPath Bloomberg Commodity ETN)
   let closes: number[] = [];
+  let latestDate = '';
   try {
     const result = await yahooChart('^BCOM', '2y', '1d');
     closes = result.closes;
+    latestDate = result.latestDate;
   } catch {
     const result = await yahooChart('DJP', '2y', '1d');
     closes = result.closes;
+    latestDate = result.latestDate;
   }
   const desc = closes.filter(v => v != null && !isNaN(v)).reverse(); // Yahoo is ascending, reverse to descending
   if (desc.length < 253) throw new Error('BCOM: insufficient data for YoY');
@@ -110,6 +119,7 @@ async function fetchBCOMYoY(): Promise<LiveValue> {
   return {
     current: parseFloat(current.toFixed(2)),
     prior:   parseFloat(prior.toFixed(2)),
+    lastUpdated: latestDate,
   };
 }
 
@@ -148,15 +158,19 @@ async function fetchZori(): Promise<LiveValue> {
   if (dataStartIdx === 0) dataStartIdx = 5;
 
   const vals: number[] = [];
+  let latestDate = '';
   for (let i = header.length - 1; i >= dataStartIdx && vals.length < 15; i--) {
     const v = parseFloat(usRow[i]);
-    if (!isNaN(v)) vals.push(v);
+    if (!isNaN(v)) {
+      if (vals.length === 0) latestDate = header[i]?.replace(/"/g, '') ?? '';
+      vals.push(v);
+    }
   }
   if (vals.length < 13) throw new Error('Zillow: insufficient data');
 
   const current = ((vals[0] / vals[12]) - 1) * 100;
   const prior   = (vals[1] && vals[13]) ? ((vals[1] / vals[13]) - 1) * 100 : current;
-  return { current: parseFloat(current.toFixed(2)), prior: parseFloat(prior.toFixed(2)) };
+  return { current: parseFloat(current.toFixed(2)), prior: parseFloat(prior.toFixed(2)), lastUpdated: latestDate };
 }
 
 // ── Main orchestrator ─────────────────────────────────────────────────
@@ -174,49 +188,52 @@ export async function fetchAll(apiKey: string): Promise<ApiResponse> {
 
   await Promise.allSettled([
     // ── FRED: direct readings ──────────────────────────────────────────
-    safe('GDPNOW', () => fredGet('GDPNOW', apiKey, 5), arr => ({
-      current: arr[0], prior: arr[1] ?? arr[0],
+    safe('GDPNOW', () => fredGet('GDPNOW', apiKey, 5), ({ values, latestDate }) => ({
+      current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate,
     })),
-    safe('WEI', () => fredGet('WEI', apiKey, 5), arr => ({
-      current: arr[0], prior: arr[1] ?? arr[0],
+    safe('WEI', () => fredGet('WEI', apiKey, 5), ({ values, latestDate }) => ({
+      current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate,
     })),
-    safe('T10Y3M', () => fredGet('T10Y3M', apiKey, 10), arr => ({
-      current: parseFloat((arr[0] * 100).toFixed(1)),
-      prior:   parseFloat((arr[1] * 100).toFixed(1)),
+    safe('T10Y3M', () => fredGet('T10Y3M', apiKey, 10), ({ values, latestDate }) => ({
+      current: parseFloat((values[0] * 100).toFixed(1)),
+      prior:   parseFloat((values[1] * 100).toFixed(1)),
+      lastUpdated: latestDate,
     })),
-    safe('HY_SPREAD', () => fredGet('BAMLH0A0HYM2', apiKey, 10), arr => ({
-      current: parseFloat((arr[0] * 100).toFixed(0)),
-      prior:   parseFloat((arr[1] * 100).toFixed(0)),
+    safe('HY_SPREAD', () => fredGet('BAMLH0A0HYM2', apiKey, 10), ({ values, latestDate }) => ({
+      current: parseFloat((values[0] * 100).toFixed(0)),
+      prior:   parseFloat((values[1] * 100).toFixed(0)),
+      lastUpdated: latestDate,
     })),
 
     // Industrial Production Index (INDPRO)
-    safe('ISM_NEW_ORDERS', () => fredGet('INDPRO', apiKey, 5), arr => ({
-      current: arr[0], prior: arr[1] ?? arr[0],
+    safe('ISM_NEW_ORDERS', () => fredGet('INDPRO', apiKey, 5), ({ values, latestDate }) => ({
+      current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate,
     })),
 
-    safe('ICSA',   () => fredGet('ICSA',   apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
-    safe('PERMIT', () => fredGet('PERMIT', apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
-    safe('T5YIFR', () => fredGet('T5YIFR', apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
-    safe('MICH_1YR', () => fredGet('MICH',  apiKey, 5), arr => ({ current: arr[0], prior: arr[1] ?? arr[0] })),
+    safe('ICSA',   () => fredGet('ICSA',   apiKey, 5), ({ values, latestDate }) => ({ current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate })),
+    safe('PERMIT', () => fredGet('PERMIT', apiKey, 5), ({ values, latestDate }) => ({ current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate })),
+    safe('T5YIFR', () => fredGet('T5YIFR', apiKey, 5), ({ values, latestDate }) => ({ current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate })),
+    safe('MICH_1YR', () => fredGet('MICH',  apiKey, 5), ({ values, latestDate }) => ({ current: values[0], prior: values[1] ?? values[0], lastUpdated: latestDate })),
 
     // LEI — USSLIND is already an annualised 6-month growth rate (%), use directly
-    safe('LEI', () => fredGet('USSLIND', apiKey, 5), arr => ({
-      current: parseFloat(arr[0].toFixed(2)),
-      prior:   parseFloat((arr[1] ?? arr[0]).toFixed(2)),
+    safe('LEI', () => fredGet('USSLIND', apiKey, 5), ({ values, latestDate }) => ({
+      current: parseFloat(values[0].toFixed(2)),
+      prior:   parseFloat((values[1] ?? values[0]).toFixed(2)),
+      lastUpdated: latestDate,
     })),
 
     // ── FRED: YoY series ──────────────────────────────────────────────
-    safe('OIL_YOY', () => fredGetLong('DCOILWTICO', apiKey), arr => {
-      const [c, p] = calcYoY(arr, 260);
-      return { current: parseFloat(c.toFixed(1)), prior: parseFloat(p.toFixed(1)) };
+    safe('OIL_YOY', () => fredGetLong('DCOILWTICO', apiKey), ({ values, latestDate }) => {
+      const [c, p] = calcYoY(values, 260);
+      return { current: parseFloat(c.toFixed(1)), prior: parseFloat(p.toFixed(1)), lastUpdated: latestDate };
     }),
-    safe('PPI_YOY', () => fredGetLong('PPIACO', apiKey), arr => {
-      const [c, p] = calcYoY(arr, 12);
-      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
+    safe('PPI_YOY', () => fredGetLong('PPIACO', apiKey), ({ values, latestDate }) => {
+      const [c, p] = calcYoY(values, 12);
+      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)), lastUpdated: latestDate };
     }),
-    safe('DOLLAR_YOY', () => fredGetLong('DTWEXBGS', apiKey), arr => {
-      const [c, p] = calcYoY(arr, 260);
-      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
+    safe('DOLLAR_YOY', () => fredGetLong('DTWEXBGS', apiKey), ({ values, latestDate }) => {
+      const [c, p] = calcYoY(values, 260);
+      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)), lastUpdated: latestDate };
     }),
 
     // ── Yahoo Finance: real-time market data ───────────────────────────
@@ -228,16 +245,16 @@ export async function fetchAll(apiKey: string): Promise<ApiResponse> {
     safe('ZORI_YOY', async () => {
       try { return await fetchZori(); }
       catch {
-        const arr = await fredGetLong('CUSR0000SEHA', apiKey);
-        const [c, p] = calcYoY(arr, 12);
-        return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
+        const { values, latestDate } = await fredGetLong('CUSR0000SEHA', apiKey);
+        const [c, p] = calcYoY(values, 12);
+        return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)), lastUpdated: latestDate };
       }
     }, v => v),
 
     // Atlanta Wage: FRED Average Hourly Earnings YoY
-    safe('ATLANTA_WAGE', () => fredGetLong('AHETPI', apiKey), arr => {
-      const [c, p] = calcYoY(arr, 12);
-      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)) };
+    safe('ATLANTA_WAGE', () => fredGetLong('AHETPI', apiKey), ({ values, latestDate }) => {
+      const [c, p] = calcYoY(values, 12);
+      return { current: parseFloat(c.toFixed(2)), prior: parseFloat(p.toFixed(2)), lastUpdated: latestDate };
     }),
   ]);
 
