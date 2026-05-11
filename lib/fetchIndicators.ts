@@ -18,7 +18,7 @@ const BROWSER_HEADERS = {
 // ── FRED fetcher ──────────────────────────────────────────────────────
 async function fredGet(series: string, apiKey: string, limit = 20): Promise<{ values: number[]; latestDate: string }> {
   const url = `${FRED_BASE}?series_id=${series}&api_key=${apiKey}&file_type=json&sort_order=desc&limit=${limit}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error(`FRED ${series}: HTTP ${res.status}`);
   const data = await res.json();
   if (data.error_message) throw new Error(`FRED ${series}: ${data.error_message}`);
@@ -42,7 +42,7 @@ async function yahooChart(
   const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${interval}&range=${range}`;
   const res = await fetch(url, {
     headers: BROWSER_HEADERS,
-    next: { revalidate: 3600 },
+    cache: 'no-store',
   });
   if (!res.ok) throw new Error(`Yahoo ${symbol}: HTTP ${res.status}`);
   const json = await res.json();
@@ -135,7 +135,7 @@ async function fetchZori(): Promise<LiveValue> {
     try {
       const res = await fetch(url, {
         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CIODashboard/1.0)' },
-        next: { revalidate: 86400 },
+        cache: 'no-store',
       });
       if (res.ok) { text = await res.text(); break; }
     } catch { /* try next */ }

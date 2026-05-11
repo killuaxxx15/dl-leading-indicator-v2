@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { fetchAll } from '@/lib/fetchIndicators';
 
 export const runtime = 'nodejs';
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 const FRED_KEY = process.env.FRED_API_KEY || '';
 
@@ -18,7 +18,7 @@ export async function GET() {
   try {
     const data = await fetchAll(FRED_KEY);
     return NextResponse.json(data, {
-      headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+      headers: { 'Cache-Control': 'no-store' },
     });
   } catch (e) {
     return NextResponse.json(
