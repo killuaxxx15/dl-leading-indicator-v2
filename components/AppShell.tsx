@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import type { LiveValue, ApiResponse } from '@/lib/types';
 import { INDICATOR_CONFIGS } from '@/lib/config';
 import { Dashboard } from '@/components/Dashboard';
@@ -16,46 +16,13 @@ type Tab = 'dashboard' | 'synthesis' | 'methodology';
 
 export function AppShell({ initialData }: { initialData: ApiResponse | null }) {
   const [tab, setTab] = useState<Tab>('dashboard');
-  const [liveValues, setLiveValues] = useState<Record<string, LiveValue>>(
-    initialData?.values ?? {}
-  );
-  const [fetchedAt, setFetchedAt] = useState<string | null>(initialData?.fetchedAt ?? null);
-  const [noApiKey, setNoApiKey] = useState(initialData?.noApiKey ?? false);
-  const [refreshing, setRefreshing] = useState(false);
-  const [fetchError, setFetchError] = useState<string | null>(null);
+  const liveValues: Record<string, LiveValue> = initialData?.values ?? {};
+  const fetchedAt: string | null = initialData?.fetchedAt ?? null;
 
-  // Count live (non-error) indicators
   const liveCount = Object.values(liveValues).filter(
     v => v.current != null && !isNaN(v.current) && !v.error
   ).length;
   const totalCount = Object.keys(INDICATOR_CONFIGS).length;
-
-  const dataStatus: 'no-key' | 'live' | 'fallback' =
-    noApiKey ? 'no-key' :
-    liveCount > 0 ? 'live' :
-    'fallback';
-
-  // Manual refresh (calls the API route, same logic but fresh)
-  const refresh = useCallback(async () => {
-    setRefreshing(true);
-    setFetchError(null);
-    try {
-      const res = await fetch('/api/indicators');
-      if (!res.ok) throw new Error(`API returned ${res.status}`);
-      const data: ApiResponse = await res.json();
-      if (data.noApiKey) {
-        setNoApiKey(true);
-      } else {
-        setLiveValues(data.values);
-        setFetchedAt(data.fetchedAt);
-        setNoApiKey(false);
-      }
-    } catch (e) {
-      setFetchError(e instanceof Error ? e.message : String(e));
-    } finally {
-      setRefreshing(false);
-    }
-  }, []);
 
   const today = new Date().toLocaleDateString('en-US', {
     month: 'long', day: 'numeric', year: 'numeric',
@@ -86,34 +53,19 @@ export function AppShell({ initialData }: { initialData: ApiResponse | null }) {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px', flexShrink: 0 }}>
-              <StatusPill status={dataStatus} liveCount={liveCount} total={totalCount} fetchedAt={fetchedAt} />
+              <StatusPill liveCount={liveCount} total={totalCount} fetchedAt={fetchedAt} />
               <DataSourcesButton liveValues={liveValues} />
             </div>
           </div>
 
-          {noApiKey && (
+          {liveCount === 0 && (
             <div style={{
               marginTop: '12px', padding: '10px 14px',
               background: '#fdf3d0', border: '1px solid #c9a227', borderRadius: '6px',
               fontSize: '12px', color: '#7a5a10', lineHeight: '1.6',
             }}>
-              <strong>FRED API key not configured.</strong> Add your free key to{' '}
-              <code style={{ background: '#f5e7b0', padding: '1px 5px', borderRadius: '3px' }}>.env.local</code> as{' '}
-              <code style={{ background: '#f5e7b0', padding: '1px 5px', borderRadius: '3px' }}>FRED_API_KEY=your_key</code>.
-              {' '}Get one free at{' '}
-              <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank" rel="noopener noreferrer" style={{ color: '#7a5a10', fontWeight: '600' }}>
-                fred.stlouisfed.org ↗
-              </a>
-            </div>
-          )}
-
-          {fetchError && !noApiKey && (
-            <div style={{
-              marginTop: '12px', padding: '10px 14px',
-              background: '#fde8e8', border: '1px solid #c0392b40', borderRadius: '6px',
-              fontSize: '11px', color: '#7f1f1f', fontFamily: 'monospace',
-            }}>
-              Refresh error: {fetchError}
+              <strong>No data yet.</strong> Run <code style={{ background: '#f5e7b0', padding: '1px 5px', borderRadius: '3px' }}>python scripts/fetch_indicators.py</code> locally,
+              or trigger the <strong>Update Indicators</strong> workflow in GitHub Actions. Data updates automatically every weekday at 10 AM ET.
             </div>
           )}
         </div>
@@ -148,23 +100,6 @@ export function AppShell({ initialData }: { initialData: ApiResponse | null }) {
               {t.label}
             </button>
           ))}
-
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', paddingRight: '4px' }}>
-            <button
-              onClick={refresh}
-              disabled={refreshing}
-              title="Fetch fresh data from sources"
-              style={{
-                background: 'none', border: `1px solid ${C.border}`, borderRadius: '5px',
-                padding: '5px 10px', cursor: refreshing ? 'wait' : 'pointer',
-                fontSize: '11px', fontFamily: 'monospace', color: C.muted,
-                display: 'flex', alignItems: 'center', gap: '5px',
-              }}
-            >
-              <span style={{ display: 'inline-block', animation: refreshing ? 'spin 1s linear infinite' : 'none' }}>↻</span>
-              {refreshing ? 'Refreshing…' : 'Refresh'}
-            </button>
-          </div>
         </div>
       </div>
 
@@ -179,33 +114,30 @@ export function AppShell({ initialData }: { initialData: ApiResponse | null }) {
 
 // ── Status pill ───────────────────────────────────────────────────────
 function StatusPill({
-  status, liveCount, total, fetchedAt,
+  liveCount, total, fetchedAt,
 }: {
-  status: 'live' | 'fallback' | 'no-key';
   liveCount: number;
   total: number;
   fetchedAt: string | null;
 }) {
-  const map = {
-    live:     { color: '#2d7a3e', bg: '#e0f0e4', dot: '#2d7a3e', label: `Live · ${liveCount}/${total} indicators` },
-    fallback: { color: '#b8720e', bg: '#fcefd6', dot: '#b8720e', label: 'Stale data · fetch failed' },
-    'no-key': { color: '#b8720e', bg: '#fcefd6', dot: '#b8720e', label: 'No API key configured' },
-  };
-  const s = map[status];
-  const timeLabel = fetchedAt
-    ? new Date(fetchedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+  const hasData = liveCount > 0;
+  const color = hasData ? '#2d7a3e' : '#b8720e';
+  const bg    = hasData ? '#e0f0e4' : '#fcefd6';
+  const label = hasData ? `Daily · ${liveCount}/${total} indicators` : 'No data yet';
+  const dateLabel = fetchedAt && hasData
+    ? new Date(fetchedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     : null;
 
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: '6px',
-      background: s.bg, border: `1px solid ${s.color}40`,
+      background: bg, border: `1px solid ${color}40`,
       borderRadius: '20px', padding: '4px 10px',
     }}>
-      <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: s.dot, flexShrink: 0 }} />
-      <span style={{ fontFamily: 'monospace', fontSize: '10px', color: s.color, fontWeight: '600' }}>
-        {s.label}
-        {timeLabel && <span style={{ fontWeight: '400', marginLeft: '5px', opacity: 0.7 }}>· {timeLabel}</span>}
+      <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: color, flexShrink: 0 }} />
+      <span style={{ fontFamily: 'monospace', fontSize: '10px', color, fontWeight: '600' }}>
+        {label}
+        {dateLabel && <span style={{ fontWeight: '400', marginLeft: '5px', opacity: 0.7 }}>· {dateLabel}</span>}
       </span>
     </div>
   );

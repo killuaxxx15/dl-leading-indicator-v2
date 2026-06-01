@@ -1,0 +1,95 @@
+{
+  "values": {
+    "GDPNOW": {
+      "current": 3.8233,
+      "prior": 1.2392,
+      "lastUpdated": "2026-04-01"
+    },
+    "WEI": {
+      "current": 3.02,
+      "prior": 3.0,
+      "lastUpdated": "2026-05-23"
+    },
+    "T10Y3M": {
+      "current": 76.0,
+      "prior": 76.0,
+      "lastUpdated": "2026-05-29"
+    },
+    "HY_SPREAD": {
+      "current": 272,
+      "prior": 271,
+      "lastUpdated": "2026-05-28"
+    },
+    "ISM_NEW_ORDERS": {
+      "current": 102.4963,
+      "prior": 101.806,
+      "lastUpdated": "2026-04-01"
+    },
+    "ICSA": {
+      "current": 215000.0,
+      "prior": 210000.0,
+      "lastUpdated": "2026-05-23"
+    },
+    "PERMIT": {
+      "current": 1423.0,
+      "prior": 1363.0,
+      "lastUpdated": "2026-04-01"
+    },
+    "T5YIFR": {
+      "current": 2.24,
+      "prior": 2.24,
+      "lastUpdated": "2026-05-29"
+    },
+    "MICH_1YR": {
+      "current": 4.7,
+      "prior": 3.8,
+      "lastUpdated": "2026-04-01"
+    },
+    "LEI": {
+      "current": 1.72,
+      "prior": 1.57,
+      "lastUpdated": "2020-02-01"
+    },
+    "OIL_YOY": {
+      "current": 59.4,
+      "prior": 68.9,
+      "lastUpdated": "2026-05-26"
+    },
+    "PPI_YOY": {
+      "current": 9.82,
+      "prior": 6.92,
+      "lastUpdated": "2026-04-01"
+    },
+    "DOLLAR_YOY": {
+      "current": -2.83,
+      "prior": -2.25,
+      "lastUpdated": "2026-05-22"
+    },
+    "ATLANTA_WAGE": {
+      "current": 3.67,
+      "prior": 3.55,
+      "lastUpdated": "2026-04-01"
+    },
+    "SPX_VS_200DMA": {
+      "current": 10.97,
+      "prior": 10.82,
+      "lastUpdated": "2026-05-29"
+    },
+    "COPPER_GOLD": {
+      "current": 0.001439,
+      "prior": 0.001394,
+      "lastUpdated": "2026-06-01"
+    },
+    "BCOM_YOY": {
+      "current": 33.68,
+      "prior": 33.62,
+      "lastUpdated": "2026-05-29"
+    },
+    "ZORI_YOY": {
+      "current": 1.73,
+      "prior": 1.7,
+      "lastUpdated": "2026-04-30"
+    }
+  },
+  "fetchedAt": "2026-06-01T08:56:47.172099+00:00"
+}
