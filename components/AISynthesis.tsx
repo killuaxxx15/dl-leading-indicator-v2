@@ -89,25 +89,14 @@ export function AISynthesis({ liveValues }: { liveValues: Record<string, LiveVal
 
   async function synthesize() {
     if (!notes.trim()) { alert('Add some notes first.'); return; }
-    let key = apiKey;
-    if (!key) {
-      const k = prompt('Enter your Anthropic API key (sk-ant-...):');
-      if (!k || !k.startsWith('sk-')) return;
-      key = k.trim();
-      setApiKey(key);
-    }
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/synthesize', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': key,
-          'anthropic-version': '2023-06-01',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-5',
+          model: 'claude-sonnet-4-6',
           max_tokens: 1500,
           system: 'Return only valid JSON. No markdown. No text before or after the JSON object.',
           messages: [{ role: 'user', content: buildPrompt() }],
