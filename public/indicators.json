@@ -1,7 +1,7 @@
 {
   "values": {
     "GDPNOW": {
-      "current": 3.8233,
+      "current": 3.0164,
       "prior": 1.2392,
       "lastUpdated": "2026-04-01"
     },
@@ -16,9 +16,9 @@
       "lastUpdated": "2026-05-29"
     },
     "HY_SPREAD": {
-      "current": 272,
-      "prior": 271,
-      "lastUpdated": "2026-05-28"
+      "current": 274,
+      "prior": 272,
+      "lastUpdated": "2026-05-31"
     },
     "ISM_NEW_ORDERS": {
       "current": 102.4963,
@@ -71,12 +71,12 @@
       "lastUpdated": "2026-04-01"
     },
     "SPX_VS_200DMA": {
-      "current": 10.97,
-      "prior": 10.82,
-      "lastUpdated": "2026-05-29"
+      "current": 11.34,
+      "prior": 10.97,
+      "lastUpdated": "2026-06-01"
     },
     "COPPER_GOLD": {
-      "current": 0.001438,
+      "current": 0.001456,
       "prior": 0.001394,
       "lastUpdated": "2026-06-01"
     },
@@ -91,5 +91,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-01T09:03:57.189389+00:00"
+  "fetchedAt": "2026-06-01T19:21:23.147233+00:00"
 }
