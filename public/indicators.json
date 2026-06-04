@@ -6,19 +6,19 @@
       "lastUpdated": "2026-04-01"
     },
     "WEI": {
-      "current": 3.02,
-      "prior": 3.0,
-      "lastUpdated": "2026-05-23"
+      "current": 3.23,
+      "prior": 3.02,
+      "lastUpdated": "2026-05-30"
     },
     "T10Y3M": {
-      "current": 69.0,
+      "current": 71.0,
       "prior": 69.0,
-      "lastUpdated": "2026-06-02"
+      "lastUpdated": "2026-06-03"
     },
     "HY_SPREAD": {
-      "current": 271,
-      "prior": 272,
-      "lastUpdated": "2026-06-02"
+      "current": 275,
+      "prior": 271,
+      "lastUpdated": "2026-06-03"
     },
     "ISM_NEW_ORDERS": {
       "current": 102.4963,
@@ -26,9 +26,9 @@
       "lastUpdated": "2026-04-01"
     },
     "ICSA": {
-      "current": 215000.0,
-      "prior": 210000.0,
-      "lastUpdated": "2026-05-23"
+      "current": 225000.0,
+      "prior": 212000.0,
+      "lastUpdated": "2026-05-30"
     },
     "PERMIT": {
       "current": 1423.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-04-01"
     },
     "T5YIFR": {
-      "current": 2.26,
+      "current": 2.23,
       "prior": 2.26,
-      "lastUpdated": "2026-06-02"
+      "lastUpdated": "2026-06-03"
     },
     "MICH_1YR": {
       "current": 4.7,
@@ -71,19 +71,19 @@
       "lastUpdated": "2026-04-01"
     },
     "SPX_VS_200DMA": {
-      "current": 10.57,
-      "prior": 11.22,
-      "lastUpdated": "2026-06-03"
+      "current": 10.65,
+      "prior": 10.31,
+      "lastUpdated": "2026-06-04"
     },
     "COPPER_GOLD": {
-      "current": 0.001454,
-      "prior": 0.001481,
-      "lastUpdated": "2026-06-03"
+      "current": 0.001448,
+      "prior": 0.001461,
+      "lastUpdated": "2026-06-04"
     },
     "BCOM_YOY": {
-      "current": 37.23,
-      "prior": 35.54,
-      "lastUpdated": "2026-06-02"
+      "current": 34.42,
+      "prior": 37.23,
+      "lastUpdated": "2026-06-03"
     },
     "ZORI_YOY": {
       "current": 1.73,
@@ -91,5 +91,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-03T18:24:07.903857+00:00"
+  "fetchedAt": "2026-06-04T16:56:25.216881+00:00"
 }
