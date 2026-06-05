@@ -11,14 +11,14 @@
       "lastUpdated": "2026-05-30"
     },
     "T10Y3M": {
-      "current": 71.0,
-      "prior": 69.0,
-      "lastUpdated": "2026-06-03"
+      "current": 69.0,
+      "prior": 71.0,
+      "lastUpdated": "2026-06-04"
     },
     "HY_SPREAD": {
-      "current": 275,
-      "prior": 271,
-      "lastUpdated": "2026-06-03"
+      "current": 274,
+      "prior": 275,
+      "lastUpdated": "2026-06-04"
     },
     "ISM_NEW_ORDERS": {
       "current": 102.4963,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-04-01"
     },
     "T5YIFR": {
-      "current": 2.23,
-      "prior": 2.26,
-      "lastUpdated": "2026-06-03"
+      "current": 2.24,
+      "prior": 2.23,
+      "lastUpdated": "2026-06-04"
     },
     "MICH_1YR": {
       "current": 4.7,
@@ -66,24 +66,24 @@
       "lastUpdated": "2026-05-29"
     },
     "ATLANTA_WAGE": {
-      "current": 3.67,
-      "prior": 3.55,
-      "lastUpdated": "2026-04-01"
+      "current": 3.56,
+      "prior": 3.67,
+      "lastUpdated": "2026-05-01"
     },
     "SPX_VS_200DMA": {
-      "current": 10.65,
-      "prior": 10.31,
-      "lastUpdated": "2026-06-04"
+      "current": 8.74,
+      "prior": 10.66,
+      "lastUpdated": "2026-06-05"
     },
     "COPPER_GOLD": {
-      "current": 0.001448,
-      "prior": 0.001461,
-      "lastUpdated": "2026-06-04"
+      "current": 0.001443,
+      "prior": 0.001455,
+      "lastUpdated": "2026-06-05"
     },
     "BCOM_YOY": {
-      "current": 34.42,
-      "prior": 37.23,
-      "lastUpdated": "2026-06-03"
+      "current": 32.57,
+      "prior": 34.42,
+      "lastUpdated": "2026-06-04"
     },
     "ZORI_YOY": {
       "current": 1.73,
@@ -91,5 +91,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-04T16:56:25.216881+00:00"
+  "fetchedAt": "2026-06-05T16:30:46.422425+00:00"
 }
