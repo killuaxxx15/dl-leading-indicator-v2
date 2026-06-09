@@ -1,9 +1,9 @@
 {
   "values": {
     "GDPNOW": {
-      "current": 3.0164,
+      "current": 3.2906,
       "prior": 1.2392,
-      "lastUpdated": "2026-06-01"
+      "lastUpdated": "2026-06-09"
     },
     "WEI": {
       "current": 3.23,
@@ -16,9 +16,9 @@
       "lastUpdated": "2026-06-08"
     },
     "HY_SPREAD": {
-      "current": 2.76,
-      "prior": 2.74,
-      "lastUpdated": "2026-06-08"
+      "current": 2.75,
+      "prior": 2.76,
+      "lastUpdated": "2026-06-09"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -71,15 +71,15 @@
       "lastUpdated": "2026-06-05"
     },
     "SPX_VS_200DMA": {
-      "current": 7.9,
-      "prior": 7.66,
-      "lastUpdated": "2026-06-08"
+      "current": 6.15,
+      "prior": 7.9,
+      "lastUpdated": "2026-06-09"
     },
     "COPPER_GOLD": {
-      "current": 13.08,
+      "current": 14.34,
       "prior": 13.26,
       "lastUpdated": "2026-06-09",
-      "raw_ratio": 0.001463,
+      "raw_ratio": 0.00148,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-09T07:13:12.580115+00:00"
+  "fetchedAt": "2026-06-09T16:32:24.802615+00:00"
 }
