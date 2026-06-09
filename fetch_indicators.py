@@ -3,6 +3,12 @@
 Fetch leading indicator data from FRED, Yahoo Finance, and Zillow.
 Writes output to public/indicators.json for Vercel to serve statically.
 Runs daily via GitHub Actions.
+
+FIXES APPLIED:
+- T10Y3M: Removed mul=100 (data already in percentage points)
+- HY_SPREAD: Removed mul=100 (data already in percentage points)
+- ISM_NEW_ORDERS: Fixed ticker INDPRO → NAPMNOI (ISM diffusion index)
+- COPPER_GOLD: Returns % vs 3-month average instead of raw ratio
 """
 
 import json
@@ -97,9 +103,9 @@ def main():
 
     fs("GDPNOW",         lambda: direct("GDPNOW"))
     fs("WEI",            lambda: direct("WEI"))
-    fs("T10Y3M",         lambda: direct("T10Y3M",       limit=10, mul=100, dec=1))
-    fs("HY_SPREAD",      lambda: direct("BAMLH0A0HYM2", limit=10, mul=100, dec=0))
-    fs("ISM_NEW_ORDERS", lambda: direct("INDPRO"))
+    fs("T10Y3M",         lambda: direct("T10Y3M",       limit=10, mul=1, dec=2))
+    fs("HY_SPREAD",      lambda: direct("BAMLH0A0HYM2", limit=10, mul=1, dec=2))
+    fs("ISM_NEW_ORDERS", lambda: direct("NAPMNOI",       limit=10, dec=1))
     fs("ICSA",           lambda: direct("ICSA"))
     fs("PERMIT",         lambda: direct("PERMIT"))
     fs("T5YIFR",         lambda: direct("T5YIFR"))
@@ -127,13 +133,28 @@ def main():
     def copper_gold():
         cu = yf.Ticker("HG=F").history(period="2y")["Close"].dropna()
         au = yf.Ticker("GC=F").history(period="2y")["Close"].dropna()
-        if cu.empty or au.empty:
-            raise ValueError("missing data")
-        return lv(
-            round(float(cu.iloc[-1]) / float(au.iloc[-1]), 6),
-            round(float(cu.iloc[-2]) / float(au.iloc[-2]), 6),
-            cu.index[-1].strftime("%Y-%m-%d"),
-        )
+
+        # Align dates (copper and gold trade on different calendars)
+        merged = cu.to_frame(name="copper").join(au.to_frame(name="gold"), how="inner").dropna()
+        if len(merged) < 130:
+            raise ValueError("insufficient aligned data")
+
+        merged["ratio"] = merged["copper"] / merged["gold"]
+        current_ratio = merged["ratio"].iloc[-1]
+        avg_3m = merged["ratio"].iloc[-63:].mean()
+        pct_vs_3m = ((current_ratio - avg_3m) / avg_3m) * 100
+
+        prior_ratio = merged["ratio"].iloc[-2]
+        prior_avg_3m = merged["ratio"].iloc[-64:-1].mean()
+        prior_pct_vs_3m = ((prior_ratio - prior_avg_3m) / prior_avg_3m) * 100
+
+        return {
+            "current": round(pct_vs_3m, 2),
+            "prior": round(prior_pct_vs_3m, 2),
+            "lastUpdated": merged.index[-1].strftime("%Y-%m-%d"),
+            "raw_ratio": round(float(current_ratio), 6),
+            "signal": "BULLISH" if pct_vs_3m > 0 else "BEARISH",
+        }
 
     def bcom_yoy():
         for sym in ["^BCOM", "DJP"]:
