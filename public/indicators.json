@@ -3,12 +3,12 @@
     "GDPNOW": {
       "current": 3.0164,
       "prior": 1.2392,
-      "lastUpdated": "2026-04-01"
+      "lastUpdated": "2026-06-01"
     },
     "WEI": {
       "current": 3.23,
       "prior": 3.02,
-      "lastUpdated": "2026-05-30"
+      "lastUpdated": "2026-06-04"
     },
     "T10Y3M": {
       "current": 0.76,
@@ -18,7 +18,7 @@
     "HY_SPREAD": {
       "current": 2.76,
       "prior": 2.74,
-      "lastUpdated": "2026-06-05"
+      "lastUpdated": "2026-06-08"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -28,12 +28,12 @@
     "ICSA": {
       "current": 225000.0,
       "prior": 212000.0,
-      "lastUpdated": "2026-05-30"
+      "lastUpdated": "2026-06-04"
     },
     "PERMIT": {
       "current": 1423.0,
       "prior": 1363.0,
-      "lastUpdated": "2026-04-01"
+      "lastUpdated": "2026-05-28"
     },
     "T5YIFR": {
       "current": 2.23,
@@ -43,32 +43,32 @@
     "MICH_1YR": {
       "current": 4.7,
       "prior": 3.8,
-      "lastUpdated": "2026-04-01"
+      "lastUpdated": "2026-05-22"
     },
     "LEI": {
       "current": 1.72,
       "prior": 1.57,
-      "lastUpdated": "2020-02-01"
+      "lastUpdated": "2020-04-14"
     },
     "OIL_YOY": {
       "current": 48.8,
       "prior": 40.2,
-      "lastUpdated": "2026-06-01"
+      "lastUpdated": "2026-06-03"
     },
     "PPI_YOY": {
       "current": 9.82,
       "prior": 6.92,
-      "lastUpdated": "2026-04-01"
+      "lastUpdated": "2026-05-13"
     },
     "DOLLAR_YOY": {
       "current": -1.37,
       "prior": -2.42,
-      "lastUpdated": "2026-06-05"
+      "lastUpdated": "2026-06-08"
     },
     "ATLANTA_WAGE": {
       "current": 3.56,
       "prior": 3.67,
-      "lastUpdated": "2026-05-01"
+      "lastUpdated": "2026-06-05"
     },
     "SPX_VS_200DMA": {
       "current": 7.9,
@@ -76,10 +76,10 @@
       "lastUpdated": "2026-06-08"
     },
     "COPPER_GOLD": {
-      "current": 12.94,
+      "current": 13.08,
       "prior": 13.26,
       "lastUpdated": "2026-06-09",
-      "raw_ratio": 0.001462,
+      "raw_ratio": 0.001463,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-09T07:01:23.169167+00:00"
+  "fetchedAt": "2026-06-09T07:13:12.580115+00:00"
 }
