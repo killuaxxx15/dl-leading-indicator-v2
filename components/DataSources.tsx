@@ -151,7 +151,7 @@ export function DataSourcesButton({ liveValues }: { liveValues: Record<string, L
                 borderBottom: `1px solid ${C.border}`,
                 marginBottom: '8px',
               }}>
-                {['Indicator', 'Source', 'Current Value', 'Data Date', 'Lead'].map(h => (
+                {['Indicator', 'Source', 'Current Value', 'Updated', 'Lead'].map(h => (
                   <div key={h} style={{ fontSize: '9px', fontFamily: 'monospace', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{h}</div>
                 ))}
               </div>
@@ -245,7 +245,7 @@ function IndicatorRow({ indicatorKey, liveValues }: { indicatorKey: string; live
       {/* Live value */}
       <ValueBadge v={v} unit={cfg.unit} />
 
-      {/* Data date */}
+      {/* Publication date */}
       <div style={{ fontSize: '10px', color: C.muted, fontFamily: 'monospace' }}>
         {v.lastUpdated || '—'}
       </div>

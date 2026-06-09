@@ -24,15 +24,17 @@ from dotenv import load_dotenv
 # Load .env.local for local development (GitHub Actions sets the env var directly)
 load_dotenv(".env.local")
 
-FRED_KEY  = os.environ.get("FRED_API_KEY", "").strip('"').strip("'")
-FRED_BASE = "https://api.stlouisfed.org/fred/series/observations"
-OUT_PATH  = os.path.join(os.path.dirname(__file__), "public", "indicators.json")
+FRED_KEY       = os.environ.get("FRED_API_KEY", "").strip('"').strip("'")
+FRED_BASE      = "https://api.stlouisfed.org/fred/series/observations"
+FRED_META_BASE = "https://api.stlouisfed.org/fred/series"
+OUT_PATH       = os.path.join(os.path.dirname(__file__), "public", "indicators.json")
 
 
 # ── Helpers ────────────────────────────────────────────────────────────
 
 def fred_get(series: str, limit: int = 20) -> dict:
-    """Fetch FRED series (descending order), with up to 3 retries on 429."""
+    """Fetch FRED series (descending order), with up to 3 retries on 429.
+    Returns observation values plus the series last_updated (publication) date."""
     for attempt in range(3):
         if attempt > 0:
             print(f"    429 on {series} — retrying in 1s...")
@@ -48,7 +50,23 @@ def fred_get(series: str, limit: int = 20) -> dict:
         if "error_message" in data:
             raise ValueError(data["error_message"])
         obs = [o for o in data["observations"] if o["value"] != "."]
-        return {"v": [float(o["value"]) for o in obs], "d": obs[0]["date"] if obs else ""}
+        obs_date = obs[0]["date"] if obs else ""
+
+        # Fetch series metadata to get the actual publication date
+        pub_date = obs_date
+        try:
+            meta_r = requests.get(FRED_META_BASE, params={
+                "series_id": series, "api_key": FRED_KEY, "file_type": "json",
+            }, timeout=30)
+            if meta_r.ok:
+                meta = meta_r.json()
+                raw = meta.get("seriess", [{}])[0].get("last_updated", "")
+                if raw:
+                    pub_date = raw[:10]  # "2026-06-01 11:10:07-05" → "2026-06-01"
+        except Exception:
+            pass  # fall back to observation date
+
+        return {"v": [float(o["value"]) for o in obs], "d": pub_date}
     raise RuntimeError(f"FRED {series}: rate limited after 3 attempts")
 
 

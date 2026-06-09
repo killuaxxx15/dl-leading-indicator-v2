@@ -65,7 +65,7 @@ export function Methodology() {
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
       <Section title="What this dashboard does">
-        <P>This is a mechanical leading indicator model. It reads current values for 17 leading indicators, standardises each one, weights them by documented lead-time quality, and produces two composite scores — one for Growth, one for Inflation — ranging from −100 to +100.</P>
+        <P>This is a mechanical leading indicator model. It reads current values for 18 leading indicators, standardises each one, weights them by documented lead-time quality, and produces two composite scores — one for Growth, one for Inflation — ranging from −100 to +100.</P>
         <P>There is no AI interpretation. Every number on the dashboard traces directly to a specific indicator and weight. If you change an indicator value, you can see exactly how much the composite moves.</P>
         <P>The purpose is to organise signals consistently so the team discusses the same framework each week, and so individual readings can be audited against the composite call.</P>
       </Section>
