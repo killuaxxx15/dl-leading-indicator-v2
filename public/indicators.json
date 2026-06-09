@@ -11,19 +11,19 @@
       "lastUpdated": "2026-05-30"
     },
     "T10Y3M": {
-      "current": 77.0,
-      "prior": 69.0,
-      "lastUpdated": "2026-06-05"
+      "current": 0.76,
+      "prior": 0.77,
+      "lastUpdated": "2026-06-08"
     },
     "HY_SPREAD": {
-      "current": 276,
-      "prior": 274,
+      "current": 2.76,
+      "prior": 2.74,
       "lastUpdated": "2026-06-05"
     },
     "ISM_NEW_ORDERS": {
-      "current": 102.4963,
-      "prior": 101.806,
-      "lastUpdated": "2026-04-01"
+      "current": null,
+      "prior": null,
+      "error": "400 Client Error: Bad Request for url: https://api.stlouisfed.org/fred/series/observations?series_id=NAPMNOI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=10"
     },
     "ICSA": {
       "current": 225000.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-04-01"
     },
     "T5YIFR": {
-      "current": 2.24,
+      "current": 2.23,
       "prior": 2.24,
-      "lastUpdated": "2026-06-05"
+      "lastUpdated": "2026-06-08"
     },
     "MICH_1YR": {
       "current": 4.7,
@@ -61,9 +61,9 @@
       "lastUpdated": "2026-04-01"
     },
     "DOLLAR_YOY": {
-      "current": -3.09,
-      "prior": -3.19,
-      "lastUpdated": "2026-05-29"
+      "current": -1.37,
+      "prior": -2.42,
+      "lastUpdated": "2026-06-05"
     },
     "ATLANTA_WAGE": {
       "current": 3.56,
@@ -71,19 +71,21 @@
       "lastUpdated": "2026-05-01"
     },
     "SPX_VS_200DMA": {
-      "current": 8.08,
+      "current": 7.9,
       "prior": 7.66,
       "lastUpdated": "2026-06-08"
     },
     "COPPER_GOLD": {
-      "current": 0.001453,
-      "prior": 0.001444,
-      "lastUpdated": "2026-06-08"
+      "current": 12.94,
+      "prior": 13.26,
+      "lastUpdated": "2026-06-09",
+      "raw_ratio": 0.001462,
+      "signal": "BULLISH"
     },
     "BCOM_YOY": {
-      "current": 29.53,
-      "prior": 32.57,
-      "lastUpdated": "2026-06-05"
+      "current": 29.18,
+      "prior": 29.53,
+      "lastUpdated": "2026-06-08"
     },
     "ZORI_YOY": {
       "current": 1.73,
@@ -91,5 +93,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-08T17:23:43.935328+00:00"
+  "fetchedAt": "2026-06-09T07:01:23.169167+00:00"
 }
