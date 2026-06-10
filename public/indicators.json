@@ -11,14 +11,14 @@
       "lastUpdated": "2026-06-04"
     },
     "T10Y3M": {
-      "current": 0.76,
-      "prior": 0.77,
-      "lastUpdated": "2026-06-08"
+      "current": 0.74,
+      "prior": 0.76,
+      "lastUpdated": "2026-06-09"
     },
     "HY_SPREAD": {
-      "current": 2.75,
-      "prior": 2.76,
-      "lastUpdated": "2026-06-09"
+      "current": 2.78,
+      "prior": 2.75,
+      "lastUpdated": "2026-06-10"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-05-28"
     },
     "T5YIFR": {
-      "current": 2.23,
-      "prior": 2.24,
-      "lastUpdated": "2026-06-08"
+      "current": 2.22,
+      "prior": 2.23,
+      "lastUpdated": "2026-06-09"
     },
     "MICH_1YR": {
       "current": 4.7,
@@ -71,21 +71,21 @@
       "lastUpdated": "2026-06-05"
     },
     "SPX_VS_200DMA": {
-      "current": 6.15,
-      "prior": 7.9,
-      "lastUpdated": "2026-06-09"
+      "current": 6.24,
+      "prior": 7.55,
+      "lastUpdated": "2026-06-10"
     },
     "COPPER_GOLD": {
-      "current": 14.34,
-      "prior": 13.26,
-      "lastUpdated": "2026-06-09",
-      "raw_ratio": 0.00148,
+      "current": 16.08,
+      "prior": 14.3,
+      "lastUpdated": "2026-06-10",
+      "raw_ratio": 0.00151,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
-      "current": 29.18,
-      "prior": 29.53,
-      "lastUpdated": "2026-06-08"
+      "current": 26.77,
+      "prior": 29.18,
+      "lastUpdated": "2026-06-09"
     },
     "ZORI_YOY": {
       "current": 1.73,
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-04-30"
     }
   },
-  "fetchedAt": "2026-06-09T16:32:24.802615+00:00"
+  "fetchedAt": "2026-06-10T17:21:24.933421+00:00"
 }
