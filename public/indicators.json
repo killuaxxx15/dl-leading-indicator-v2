@@ -1,9 +1,9 @@
 {
   "values": {
     "GDPNOW": {
-      "current": 3.2906,
+      "current": 2.8314,
       "prior": 1.2392,
-      "lastUpdated": "2026-06-09"
+      "lastUpdated": "2026-06-16"
     },
     "WEI": {
       "current": 2.9,
@@ -11,14 +11,14 @@
       "lastUpdated": "2026-06-11"
     },
     "T10Y3M": {
-      "current": 0.7,
-      "prior": 0.67,
-      "lastUpdated": "2026-06-12"
+      "current": 0.68,
+      "prior": 0.7,
+      "lastUpdated": "2026-06-15"
     },
     "HY_SPREAD": {
-      "current": 2.71,
-      "prior": 2.78,
-      "lastUpdated": "2026-06-15"
+      "current": 2.66,
+      "prior": 2.71,
+      "lastUpdated": "2026-06-16"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -31,14 +31,14 @@
       "lastUpdated": "2026-06-11"
     },
     "PERMIT": {
-      "current": 1423.0,
-      "prior": 1363.0,
-      "lastUpdated": "2026-05-28"
+      "current": 1413.0,
+      "prior": 1423.0,
+      "lastUpdated": "2026-06-16"
     },
     "T5YIFR": {
-      "current": 2.23,
-      "prior": 2.18,
-      "lastUpdated": "2026-06-12"
+      "current": 2.24,
+      "prior": 2.23,
+      "lastUpdated": "2026-06-15"
     },
     "MICH_1YR": {
       "current": 4.7,
@@ -61,9 +61,9 @@
       "lastUpdated": "2026-06-11"
     },
     "DOLLAR_YOY": {
-      "current": -1.37,
-      "prior": -2.42,
-      "lastUpdated": "2026-06-08"
+      "current": -1.69,
+      "prior": -1.53,
+      "lastUpdated": "2026-06-15"
     },
     "ATLANTA_WAGE": {
       "current": 3.56,
@@ -71,15 +71,15 @@
       "lastUpdated": "2026-06-05"
     },
     "SPX_VS_200DMA": {
-      "current": 9.79,
-      "prior": 7.98,
-      "lastUpdated": "2026-06-15"
+      "current": 9.29,
+      "prior": 9.68,
+      "lastUpdated": "2026-06-16"
     },
     "COPPER_GOLD": {
-      "current": 13.35,
-      "prior": 16.19,
-      "lastUpdated": "2026-06-15",
-      "raw_ratio": 0.001494,
+      "current": 12.58,
+      "prior": 13.6,
+      "lastUpdated": "2026-06-16",
+      "raw_ratio": 0.00149,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -88,10 +88,10 @@
       "lastUpdated": "2026-06-12"
     },
     "ZORI_YOY": {
-      "current": 1.73,
-      "prior": 1.7,
-      "lastUpdated": "2026-04-30"
+      "current": 1.9,
+      "prior": 1.77,
+      "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-06-15T18:27:47.403338+00:00"
+  "fetchedAt": "2026-06-16T18:27:52.415352+00:00"
 }
