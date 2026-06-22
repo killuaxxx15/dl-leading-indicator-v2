@@ -76,16 +76,16 @@
       "lastUpdated": "2026-06-18"
     },
     "COPPER_GOLD": {
-      "current": 13.45,
+      "current": 12.0,
       "prior": 13.05,
-      "lastUpdated": "2026-06-19",
-      "raw_ratio": 0.001521,
+      "lastUpdated": "2026-06-21",
+      "raw_ratio": 0.001501,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
-      "current": 25.42,
-      "prior": 26.3,
-      "lastUpdated": "2026-06-12"
+      "current": 18.86,
+      "prior": 21.29,
+      "lastUpdated": "2026-06-18"
     },
     "ZORI_YOY": {
       "current": 1.9,
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-06-19T16:32:27.552316+00:00"
+  "fetchedAt": "2026-06-22T02:21:27.827832+00:00"
 }
