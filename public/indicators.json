@@ -71,15 +71,15 @@
       "lastUpdated": "2026-06-05"
     },
     "SPX_VS_200DMA": {
-      "current": 6.2,
-      "prior": 6.31,
+      "current": 6.31,
+      "prior": 6.39,
       "lastUpdated": "2026-06-26"
     },
     "COPPER_GOLD": {
-      "current": 11.28,
+      "current": 10.94,
       "prior": 11.31,
       "lastUpdated": "2026-06-26",
-      "raw_ratio": 0.00151,
+      "raw_ratio": 0.001506,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-06-26T23:05:21.978244+00:00"
+  "fetchedAt": "2026-06-27T23:01:35.379251+00:00"
 }
