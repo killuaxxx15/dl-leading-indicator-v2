@@ -6,19 +6,19 @@
       "lastUpdated": "2026-07-01"
     },
     "WEI": {
-      "current": 2.5,
-      "prior": 3.1,
-      "lastUpdated": "2026-06-25"
+      "current": 2.57,
+      "prior": 2.57,
+      "lastUpdated": "2026-07-02"
     },
     "T10Y3M": {
-      "current": 0.63,
-      "prior": 0.57,
-      "lastUpdated": "2026-07-01"
+      "current": 0.67,
+      "prior": 0.63,
+      "lastUpdated": "2026-07-02"
     },
     "HY_SPREAD": {
-      "current": 2.75,
-      "prior": 2.8,
-      "lastUpdated": "2026-07-01"
+      "current": 2.74,
+      "prior": 2.75,
+      "lastUpdated": "2026-07-02"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -27,8 +27,8 @@
     },
     "ICSA": {
       "current": 215000.0,
-      "prior": 227000.0,
-      "lastUpdated": "2026-06-25"
+      "prior": 216000.0,
+      "lastUpdated": "2026-07-02"
     },
     "PERMIT": {
       "current": 1410.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-06-24"
     },
     "T5YIFR": {
-      "current": 2.2,
-      "prior": 2.22,
-      "lastUpdated": "2026-07-01"
+      "current": 2.22,
+      "prior": 2.2,
+      "lastUpdated": "2026-07-02"
     },
     "MICH_1YR": {
       "current": 4.8,
@@ -66,20 +66,20 @@
       "lastUpdated": "2026-06-29"
     },
     "ATLANTA_WAGE": {
-      "current": 3.56,
-      "prior": 3.67,
-      "lastUpdated": "2026-06-05"
+      "current": 3.42,
+      "prior": 3.56,
+      "lastUpdated": "2026-07-02"
     },
     "SPX_VS_200DMA": {
-      "current": 7.85,
-      "prior": 8.15,
-      "lastUpdated": "2026-07-01"
+      "current": 7.78,
+      "prior": 7.85,
+      "lastUpdated": "2026-07-02"
     },
     "COPPER_GOLD": {
-      "current": 10.7,
-      "prior": 12.59,
-      "lastUpdated": "2026-07-01",
-      "raw_ratio": 0.001519,
+      "current": 8.41,
+      "prior": 9.7,
+      "lastUpdated": "2026-07-02",
+      "raw_ratio": 0.001493,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-07-01T23:14:29.726536+00:00"
+  "fetchedAt": "2026-07-02T23:05:21.242926+00:00"
 }
