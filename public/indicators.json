@@ -16,9 +16,9 @@
       "lastUpdated": "2026-07-02"
     },
     "HY_SPREAD": {
-      "current": 2.74,
-      "prior": 2.75,
-      "lastUpdated": "2026-07-02"
+      "current": 2.75,
+      "prior": 2.74,
+      "lastUpdated": "2026-07-03"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -76,10 +76,10 @@
       "lastUpdated": "2026-07-02"
     },
     "COPPER_GOLD": {
-      "current": 8.41,
-      "prior": 9.7,
-      "lastUpdated": "2026-07-02",
-      "raw_ratio": 0.001493,
+      "current": 7.59,
+      "prior": 7.97,
+      "lastUpdated": "2026-07-03",
+      "raw_ratio": 0.001486,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-07-02T23:05:21.242926+00:00"
+  "fetchedAt": "2026-07-03T23:02:14.563842+00:00"
 }
