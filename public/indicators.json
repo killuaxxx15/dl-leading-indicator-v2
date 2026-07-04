@@ -83,9 +83,9 @@
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
-      "current": 20.33,
-      "prior": 21.09,
-      "lastUpdated": "2026-06-26"
+      "current": 28.13,
+      "prior": 28.08,
+      "lastUpdated": "2026-07-02"
     },
     "ZORI_YOY": {
       "current": 1.9,
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-07-03T23:02:14.563842+00:00"
+  "fetchedAt": "2026-07-04T22:57:11.549741+00:00"
 }
