@@ -11,14 +11,14 @@
       "lastUpdated": "2026-07-09"
     },
     "T10Y3M": {
-      "current": 0.74,
-      "prior": 0.73,
-      "lastUpdated": "2026-07-14"
+      "current": 0.72,
+      "prior": 0.74,
+      "lastUpdated": "2026-07-15"
     },
     "HY_SPREAD": {
-      "current": 2.69,
+      "current": 2.72,
       "prior": 2.69,
-      "lastUpdated": "2026-07-14"
+      "lastUpdated": "2026-07-15"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -36,14 +36,14 @@
       "lastUpdated": "2026-06-24"
     },
     "T5YIFR": {
-      "current": 2.22,
-      "prior": 2.21,
-      "lastUpdated": "2026-07-14"
+      "current": null,
+      "prior": null,
+      "error": "HTTPSConnectionPool(host='api.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
     },
     "MICH_1YR": {
-      "current": 4.8,
-      "prior": 4.7,
-      "lastUpdated": "2026-06-26"
+      "current": null,
+      "prior": null,
+      "error": "HTTPSConnectionPool(host='api.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
     },
     "LEI": {
       "current": 1.72,
@@ -51,14 +51,14 @@
       "lastUpdated": "2020-04-14"
     },
     "OIL_YOY": {
-      "current": -8.0,
-      "prior": -3.9,
-      "lastUpdated": "2026-07-08"
+      "current": 20.0,
+      "prior": 10.7,
+      "lastUpdated": "2026-07-15"
     },
     "PPI_YOY": {
-      "current": 13.08,
-      "prior": 9.41,
-      "lastUpdated": "2026-06-11"
+      "current": 10.11,
+      "prior": 12.3,
+      "lastUpdated": "2026-07-15"
     },
     "DOLLAR_YOY": {
       "current": 0.14,
@@ -71,14 +71,14 @@
       "lastUpdated": "2026-07-02"
     },
     "SPX_VS_200DMA": {
-      "current": 8.17,
-      "prior": 7.83,
-      "lastUpdated": "2026-07-14"
+      "current": 8.51,
+      "prior": 8.17,
+      "lastUpdated": "2026-07-15"
     },
     "COPPER_GOLD": {
-      "current": 11.25,
-      "prior": 10.93,
-      "lastUpdated": "2026-07-14",
+      "current": 10.86,
+      "prior": 10.5,
+      "lastUpdated": "2026-07-15",
       "raw_ratio": 0.001569,
       "signal": "BULLISH"
     },
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-05-31"
     }
   },
-  "fetchedAt": "2026-07-14T22:56:10.660395+00:00"
+  "fetchedAt": "2026-07-15T22:59:20.184372+00:00"
 }
