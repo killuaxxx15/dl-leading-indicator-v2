@@ -6,19 +6,19 @@
       "lastUpdated": "2026-07-17"
     },
     "WEI": {
-      "current": 2.61,
-      "prior": 3.12,
-      "lastUpdated": "2026-07-16"
+      "current": 2.93,
+      "prior": 2.6,
+      "lastUpdated": "2026-07-23"
     },
     "T10Y3M": {
-      "current": 0.78,
-      "prior": 0.76,
-      "lastUpdated": "2026-07-22"
+      "current": 0.76,
+      "prior": 0.78,
+      "lastUpdated": "2026-07-23"
     },
     "HY_SPREAD": {
-      "current": 2.69,
+      "current": 2.68,
       "prior": 2.69,
-      "lastUpdated": "2026-07-22"
+      "lastUpdated": "2026-07-23"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -26,9 +26,9 @@
       "error": "400 Client Error: Bad Request for url: https://api.stlouisfed.org/fred/series/observations?series_id=NAPMNOI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=10"
     },
     "ICSA": {
-      "current": 208000.0,
-      "prior": 216000.0,
-      "lastUpdated": "2026-07-16"
+      "current": 187000.0,
+      "prior": 209000.0,
+      "lastUpdated": "2026-07-23"
     },
     "PERMIT": {
       "current": 1367.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-07-17"
     },
     "T5YIFR": {
-      "current": 2.26,
-      "prior": 2.24,
-      "lastUpdated": "2026-07-22"
+      "current": 2.27,
+      "prior": 2.26,
+      "lastUpdated": "2026-07-23"
     },
     "MICH_1YR": {
       "current": 4.8,
@@ -71,15 +71,15 @@
       "lastUpdated": "2026-07-02"
     },
     "SPX_VS_200DMA": {
-      "current": 7.14,
-      "prior": 7.35,
-      "lastUpdated": "2026-07-22"
+      "current": 5.8,
+      "prior": 7.14,
+      "lastUpdated": "2026-07-23"
     },
     "COPPER_GOLD": {
-      "current": 8.95,
-      "prior": 11.44,
-      "lastUpdated": "2026-07-22",
-      "raw_ratio": 0.001569,
+      "current": 8.26,
+      "prior": 8.06,
+      "lastUpdated": "2026-07-23",
+      "raw_ratio": 0.001563,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-07-22T23:02:28.972037+00:00"
+  "fetchedAt": "2026-07-23T22:55:21.906837+00:00"
 }
