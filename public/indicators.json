@@ -6,19 +6,19 @@
       "lastUpdated": "2026-07-17"
     },
     "WEI": {
-      "current": 2.93,
-      "prior": 2.6,
-      "lastUpdated": "2026-07-23"
+      "current": null,
+      "prior": null,
+      "error": "502 Server Error: Bad Gateway for url: https://api.stlouisfed.org/fred/series/observations?series_id=WEI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=5"
     },
     "T10Y3M": {
-      "current": 0.76,
-      "prior": 0.78,
-      "lastUpdated": "2026-07-23"
+      "current": 0.73,
+      "prior": 0.76,
+      "lastUpdated": "2026-07-24"
     },
     "HY_SPREAD": {
-      "current": 2.68,
-      "prior": 2.69,
-      "lastUpdated": "2026-07-23"
+      "current": 2.77,
+      "prior": 2.68,
+      "lastUpdated": "2026-07-24"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -31,14 +31,14 @@
       "lastUpdated": "2026-07-23"
     },
     "PERMIT": {
-      "current": 1367.0,
+      "current": 1374.0,
       "prior": 1410.0,
-      "lastUpdated": "2026-07-17"
+      "lastUpdated": "2026-07-24"
     },
     "T5YIFR": {
-      "current": 2.27,
-      "prior": 2.26,
-      "lastUpdated": "2026-07-23"
+      "current": 2.28,
+      "prior": 2.27,
+      "lastUpdated": "2026-07-24"
     },
     "MICH_1YR": {
       "current": 4.8,
@@ -72,13 +72,13 @@
     },
     "SPX_VS_200DMA": {
       "current": 5.8,
-      "prior": 7.14,
-      "lastUpdated": "2026-07-23"
+      "prior": 5.8,
+      "lastUpdated": "2026-07-24"
     },
     "COPPER_GOLD": {
-      "current": 8.26,
-      "prior": 8.06,
-      "lastUpdated": "2026-07-23",
+      "current": 7.94,
+      "prior": 7.92,
+      "lastUpdated": "2026-07-24",
       "raw_ratio": 0.001563,
       "signal": "BULLISH"
     },
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-07-23T22:55:21.906837+00:00"
+  "fetchedAt": "2026-07-24T23:01:47.185740+00:00"
 }
