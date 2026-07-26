@@ -76,9 +76,9 @@
       "lastUpdated": "2026-07-24"
     },
     "COPPER_GOLD": {
-      "current": 7.31,
-      "prior": 7.92,
-      "lastUpdated": "2026-07-24",
+      "current": 7.01,
+      "prior": 7.31,
+      "lastUpdated": "2026-07-26",
       "raw_ratio": 0.001554,
       "signal": "BULLISH"
     },
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-07-25T22:55:05.039498+00:00"
+  "fetchedAt": "2026-07-26T22:58:06.033353+00:00"
 }
