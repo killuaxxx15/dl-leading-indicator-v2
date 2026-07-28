@@ -1,9 +1,9 @@
 {
   "values": {
     "GDPNOW": {
-      "current": null,
-      "prior": null,
-      "error": "500 Server Error: Internal Server Error for url: https://api.stlouisfed.org/fred/series/observations?series_id=GDPNOW&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=5"
+      "current": 1.54,
+      "prior": 1.2392,
+      "lastUpdated": "2026-07-28"
     },
     "WEI": {
       "current": 2.93,
@@ -11,14 +11,14 @@
       "lastUpdated": "2026-07-23"
     },
     "T10Y3M": {
-      "current": 0.69,
-      "prior": 0.73,
-      "lastUpdated": "2026-07-27"
+      "current": 0.71,
+      "prior": 0.69,
+      "lastUpdated": "2026-07-28"
     },
     "HY_SPREAD": {
-      "current": 2.79,
-      "prior": 2.77,
-      "lastUpdated": "2026-07-27"
+      "current": 2.81,
+      "prior": 2.79,
+      "lastUpdated": "2026-07-28"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -37,8 +37,8 @@
     },
     "T5YIFR": {
       "current": 2.24,
-      "prior": 2.28,
-      "lastUpdated": "2026-07-27"
+      "prior": 2.24,
+      "lastUpdated": "2026-07-28"
     },
     "MICH_1YR": {
       "current": 4.8,
@@ -71,15 +71,15 @@
       "lastUpdated": "2026-07-02"
     },
     "SPX_VS_200DMA": {
-      "current": 5.76,
-      "prior": 5.8,
-      "lastUpdated": "2026-07-27"
+      "current": 5.93,
+      "prior": 5.76,
+      "lastUpdated": "2026-07-28"
     },
     "COPPER_GOLD": {
-      "current": 8.0,
-      "prior": 7.31,
-      "lastUpdated": "2026-07-27",
-      "raw_ratio": 0.001569,
+      "current": 8.27,
+      "prior": 7.12,
+      "lastUpdated": "2026-07-28",
+      "raw_ratio": 0.001577,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-07-27T23:02:17.068466+00:00"
+  "fetchedAt": "2026-07-28T22:56:43.684714+00:00"
 }
