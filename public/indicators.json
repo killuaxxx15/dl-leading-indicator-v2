@@ -1,24 +1,24 @@
 {
   "values": {
     "GDPNOW": {
-      "current": 1.54,
-      "prior": 1.2392,
-      "lastUpdated": "2026-07-28"
+      "current": 4.9543,
+      "prior": 1.54,
+      "lastUpdated": "2026-07-30"
     },
     "WEI": {
-      "current": 2.93,
-      "prior": 2.6,
-      "lastUpdated": "2026-07-23"
+      "current": 2.46,
+      "prior": 2.87,
+      "lastUpdated": "2026-07-30"
     },
     "T10Y3M": {
-      "current": 0.84,
-      "prior": 0.71,
-      "lastUpdated": "2026-07-29"
+      "current": 0.86,
+      "prior": 0.84,
+      "lastUpdated": "2026-07-30"
     },
     "HY_SPREAD": {
-      "current": 2.84,
-      "prior": 2.81,
-      "lastUpdated": "2026-07-29"
+      "current": 2.87,
+      "prior": 2.84,
+      "lastUpdated": "2026-07-30"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -26,9 +26,9 @@
       "error": "400 Client Error: Bad Request for url: https://api.stlouisfed.org/fred/series/observations?series_id=NAPMNOI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=10"
     },
     "ICSA": {
-      "current": 187000.0,
-      "prior": 209000.0,
-      "lastUpdated": "2026-07-23"
+      "current": 197000.0,
+      "prior": 188000.0,
+      "lastUpdated": "2026-07-30"
     },
     "PERMIT": {
       "current": 1374.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-07-24"
     },
     "T5YIFR": {
-      "current": 2.28,
-      "prior": 2.24,
-      "lastUpdated": "2026-07-29"
+      "current": 2.3,
+      "prior": 2.28,
+      "lastUpdated": "2026-07-30"
     },
     "MICH_1YR": {
       "current": 4.8,
@@ -71,15 +71,15 @@
       "lastUpdated": "2026-07-02"
     },
     "SPX_VS_200DMA": {
-      "current": 4.29,
-      "prior": 5.93,
-      "lastUpdated": "2026-07-29"
+      "current": 5.95,
+      "prior": 4.29,
+      "lastUpdated": "2026-07-30"
     },
     "COPPER_GOLD": {
-      "current": 5.33,
-      "prior": 7.51,
-      "lastUpdated": "2026-07-29",
-      "raw_ratio": 0.001539,
+      "current": 6.41,
+      "prior": 6.42,
+      "lastUpdated": "2026-07-30",
+      "raw_ratio": 0.001559,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-07-29T22:58:17.549079+00:00"
+  "fetchedAt": "2026-07-30T23:05:33.505075+00:00"
 }
