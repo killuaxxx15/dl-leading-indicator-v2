@@ -76,10 +76,10 @@
       "lastUpdated": "2026-08-07"
     },
     "COPPER_GOLD": {
-      "current": 1.4,
-      "prior": 5.83,
-      "lastUpdated": "2026-08-07",
-      "raw_ratio": 0.001514,
+      "current": 0.33,
+      "prior": 1.4,
+      "lastUpdated": "2026-08-09",
+      "raw_ratio": 0.001501,
       "signal": "BULLISH"
     },
     "BCOM_YOY": {
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-08-08T22:27:29.817164+00:00"
+  "fetchedAt": "2026-08-09T22:29:20.282258+00:00"
 }
