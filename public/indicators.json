@@ -6,19 +6,19 @@
       "lastUpdated": "2026-08-06"
     },
     "WEI": {
-      "current": 2.68,
-      "prior": 2.42,
-      "lastUpdated": "2026-08-06"
+      "current": 2.7,
+      "prior": 2.71,
+      "lastUpdated": "2026-08-13"
     },
     "T10Y3M": {
-      "current": 0.81,
+      "current": 0.76,
       "prior": 0.81,
-      "lastUpdated": "2026-08-12"
+      "lastUpdated": "2026-08-13"
     },
     "HY_SPREAD": {
-      "current": 2.72,
-      "prior": 2.7,
-      "lastUpdated": "2026-08-12"
+      "current": 2.71,
+      "prior": 2.72,
+      "lastUpdated": "2026-08-13"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -26,9 +26,9 @@
       "error": "400 Client Error: Bad Request for url: https://api.stlouisfed.org/fred/series/observations?series_id=NAPMNOI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=10"
     },
     "ICSA": {
-      "current": 199000.0,
-      "prior": 198000.0,
-      "lastUpdated": "2026-08-06"
+      "current": 209000.0,
+      "prior": 200000.0,
+      "lastUpdated": "2026-08-13"
     },
     "PERMIT": {
       "current": 1374.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-07-24"
     },
     "T5YIFR": {
-      "current": 2.28,
-      "prior": 2.31,
-      "lastUpdated": "2026-08-12"
+      "current": 2.27,
+      "prior": 2.28,
+      "lastUpdated": "2026-08-13"
     },
     "MICH_1YR": {
       "current": 4.6,
@@ -56,9 +56,9 @@
       "lastUpdated": "2026-08-12"
     },
     "PPI_YOY": {
-      "current": 10.11,
-      "prior": 12.3,
-      "lastUpdated": "2026-07-15"
+      "current": 8.27,
+      "prior": 9.9,
+      "lastUpdated": "2026-08-13"
     },
     "DOLLAR_YOY": {
       "current": -0.42,
@@ -71,21 +71,21 @@
       "lastUpdated": "2026-08-07"
     },
     "SPX_VS_200DMA": {
-      "current": 9.85,
-      "prior": 9.64,
-      "lastUpdated": "2026-08-12"
+      "current": 10.48,
+      "prior": 9.85,
+      "lastUpdated": "2026-08-13"
     },
     "COPPER_GOLD": {
-      "current": -1.12,
-      "prior": 0.69,
-      "lastUpdated": "2026-08-12",
-      "raw_ratio": 0.001483,
+      "current": -0.58,
+      "prior": -0.24,
+      "lastUpdated": "2026-08-13",
+      "raw_ratio": 0.001493,
       "signal": "BEARISH"
     },
     "BCOM_YOY": {
-      "current": 26.28,
-      "prior": 25.14,
-      "lastUpdated": "2026-07-17"
+      "current": 43.19,
+      "prior": 45.81,
+      "lastUpdated": "2026-08-13"
     },
     "ZORI_YOY": {
       "current": 2.13,
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-06-30"
     }
   },
-  "fetchedAt": "2026-08-12T22:38:20.415541+00:00"
+  "fetchedAt": "2026-08-13T22:39:31.790349+00:00"
 }
