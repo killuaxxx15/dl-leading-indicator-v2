@@ -71,16 +71,16 @@
       "lastUpdated": "2026-08-07"
     },
     "SPX_VS_200DMA": {
-      "current": 10.21,
-      "prior": 10.48,
+      "current": 10.05,
+      "prior": 10.31,
       "lastUpdated": "2026-08-14"
     },
     "COPPER_GOLD": {
-      "current": 0.23,
-      "prior": 0.62,
-      "lastUpdated": "2026-08-14",
-      "raw_ratio": 0.001507,
-      "signal": "BULLISH"
+      "current": -0.98,
+      "prior": 0.23,
+      "lastUpdated": "2026-08-16",
+      "raw_ratio": 0.00149,
+      "signal": "BEARISH"
     },
     "BCOM_YOY": {
       "current": 44.76,
@@ -88,10 +88,10 @@
       "lastUpdated": "2026-08-14"
     },
     "ZORI_YOY": {
-      "current": 2.13,
-      "prior": 1.95,
-      "lastUpdated": "2026-06-30"
+      "current": 2.4,
+      "prior": 2.16,
+      "lastUpdated": "2026-07-31"
     }
   },
-  "fetchedAt": "2026-08-15T22:18:56.375199+00:00"
+  "fetchedAt": "2026-08-16T22:19:09.717558+00:00"
 }
