@@ -6,19 +6,19 @@
       "lastUpdated": "2026-08-18"
     },
     "WEI": {
-      "current": 2.7,
-      "prior": 2.71,
-      "lastUpdated": "2026-08-13"
+      "current": 2.56,
+      "prior": 2.7,
+      "lastUpdated": "2026-08-20"
     },
     "T10Y3M": {
-      "current": 0.79,
-      "prior": 0.85,
-      "lastUpdated": "2026-08-19"
+      "current": 0.82,
+      "prior": 0.79,
+      "lastUpdated": "2026-08-20"
     },
     "HY_SPREAD": {
-      "current": 2.75,
-      "prior": 2.7,
-      "lastUpdated": "2026-08-19"
+      "current": 2.73,
+      "prior": 2.75,
+      "lastUpdated": "2026-08-20"
     },
     "ISM_NEW_ORDERS": {
       "current": null,
@@ -26,9 +26,9 @@
       "error": "400 Client Error: Bad Request for url: https://api.stlouisfed.org/fred/series/observations?series_id=NAPMNOI&api_key=4b213448b643e17b7327558be30b8709&file_type=json&sort_order=desc&limit=10"
     },
     "ICSA": {
-      "current": 209000.0,
-      "prior": 200000.0,
-      "lastUpdated": "2026-08-13"
+      "current": 206000.0,
+      "prior": 212000.0,
+      "lastUpdated": "2026-08-20"
     },
     "PERMIT": {
       "current": 1443.0,
@@ -36,9 +36,9 @@
       "lastUpdated": "2026-08-18"
     },
     "T5YIFR": {
-      "current": 2.32,
-      "prior": 2.33,
-      "lastUpdated": "2026-08-19"
+      "current": 2.34,
+      "prior": 2.32,
+      "lastUpdated": "2026-08-20"
     },
     "MICH_1YR": {
       "current": 4.6,
@@ -71,21 +71,21 @@
       "lastUpdated": "2026-08-07"
     },
     "SPX_VS_200DMA": {
-      "current": 8.75,
-      "prior": 8.59,
-      "lastUpdated": "2026-08-19"
+      "current": 7.9,
+      "prior": 8.9,
+      "lastUpdated": "2026-08-20"
     },
     "COPPER_GOLD": {
-      "current": -5.69,
-      "prior": -1.46,
-      "lastUpdated": "2026-08-19",
-      "raw_ratio": 0.001422,
+      "current": -6.1,
+      "prior": -4.17,
+      "lastUpdated": "2026-08-20",
+      "raw_ratio": 0.001416,
       "signal": "BEARISH"
     },
     "BCOM_YOY": {
-      "current": 26.28,
-      "prior": 25.14,
-      "lastUpdated": "2026-07-17"
+      "current": 50.54,
+      "prior": 49.01,
+      "lastUpdated": "2026-08-20"
     },
     "ZORI_YOY": {
       "current": 2.4,
@@ -93,5 +93,5 @@
       "lastUpdated": "2026-07-31"
     }
   },
-  "fetchedAt": "2026-08-19T22:22:40.075450+00:00"
+  "fetchedAt": "2026-08-20T22:25:10.415421+00:00"
 }
